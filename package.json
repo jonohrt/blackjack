@@ -1,0 +1,55 @@
+{
+  "name": "blackjack",
+  "version": "0.0.1",
+  "private": true,
+  "description": "Awesome multiplayer blackjack game",
+  "keywords": [],
+  "author": "",
+  "license": "",
+  "main": "server/app.js",
+  "dependencies": {
+    "babel-cli": "^6.24.1",
+    "babel-core": "^6.24.1",
+    "babel-plugin-transform-runtime": "^6.23.0",
+    "babel-polyfill": "^6.23.0",
+    "babel-preset-es2015": "^6.24.1",
+    "babel-runtime": "^6.23.0",
+    "babel-watch": "^2.0.6",
+    "body-parser": "1.9.x",
+    "express": "^4.12.3",
+    "swagger-express-mw": "^0.1.0",
+    "swagger-tools": "^0.10.1"
+  },
+  "devDependencies": {
+    "eslint": "^3.19.0",
+    "eslint-config-standard": "^10.2.1",
+    "eslint-plugin-import": "^2.3.0",
+    "eslint-plugin-node": "^4.2.2",
+    "eslint-plugin-promise": "^3.5.0",
+    "eslint-plugin-standard": "^3.0.1",
+    "prettier-eslint-cli": "^3.6.1",
+    "prettier-standard": "^5.0.0",
+    "should": "^7.1.0",
+    "supertest": "^1.0.0"
+  },
+  "scripts": {
+    "start": "babel-watch server/app.js",
+    "test": "swagger project test"
+  },
+  "babel": {
+    "plugins": [
+      [
+        "transform-runtime",
+        {
+          "helpers": false,
+          "polyfill": false,
+          "regenerator": true,
+          "moduleName": "babel-runtime"
+        }
+      ]
+    ],
+    "presets": [
+      "es2015"
+    ]
+  }
+}
