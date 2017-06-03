@@ -22,11 +22,11 @@ paths:
     # binds a127 app logic to a route
     x-swagger-router-controller: player
     get:
-      description: Get player by id
+      description: Get player by _id
       # used as the method name of the controller
       operationId: getPlayer
       parameters:
-        - name: id
+        - name: _id
           in: query
           description: The id of the player
           required: true
@@ -42,16 +42,48 @@ paths:
           description: Error
           schema:
             $ref: "#/definitions/ErrorResponse"
+    post:
+      description: Create a player
+      # used as the method name of the controller
+      operationId: createPlayer
+      parameters:
+        - name: name
+          in: body
+          description: The name of the player
+          required: true
+          schema:
+            $ref: '#/definitions/NewPlayer'
+      responses:
+        "200":
+          description: Success
+          schema:
+            # a pointer to a definition
+            $ref: "#/definitions/GetPlayerResponse"
+        # responses may fall through to errors
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
   /swagger:
     x-swagger-pipe: swagger_raw
 # complex objects have schema definitions
 definitions:
+
   GetPlayerResponse:
     required:
       - message
     properties:
       message:
         type: string
+        
+  NewPlayer:
+    required:
+      - name
+    properties:
+      name:
+        type: string
+
+        
   ErrorResponse:
     required:
       - message

@@ -17,8 +17,16 @@
     "babel-watch": "^2.0.6",
     "body-parser": "1.9.x",
     "express": "^4.12.3",
+    "mongo-func": "https://github.com/jonohrt/mongo-func",
+    "mongodb": "^2.2.27",
+    "ramda-fantasy": "^0.8.0",
+    "rosie": "^1.6.0",
     "swagger-express-mw": "^0.1.0",
-    "swagger-tools": "^0.10.1"
+    "dotenv": "^4.0.0",
+    "swagger-tools": "^0.10.1",
+    "chai": "^4.0.0",
+    "data.task": "^3.1.1",
+    "database-cleaner": "^1.2.0"
   },
   "devDependencies": {
     "eslint": "^3.19.0",
@@ -29,12 +37,15 @@
     "eslint-plugin-standard": "^3.0.1",
     "prettier-eslint-cli": "^3.6.1",
     "prettier-standard": "^5.0.0",
-    "should": "^7.1.0",
+    "mocha": "^3.4.2",
     "supertest": "^1.0.0"
   },
   "scripts": {
     "start": "babel-watch server/app.js",
-    "test": "swagger project test"
+    "test": "source .env.test; mocha --compilers js:babel-core/register --recursive server/test/*.js server/test/**/*.js",
+    "test-watch": "source .env.test; mocha --compilers js:babel-core/register --watch --recursive server/test/*.js server/test/**/*.js",
+    "start-db": "mongod --dbpath data --fork --logpath ./server/log/mongodb.log",
+    "edit": "swagger_swagger_fileName=server/api/swagger/swagger.yaml swagger project edit"
   },
   "babel": {
     "plugins": [

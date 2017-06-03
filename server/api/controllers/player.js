@@ -1,4 +1,5 @@
 'use strict'
+import { playerService } from '../../services/player-service'
 /*
  'use strict' is not required but helpful for turning syntactical errors into true errors in the program flow
  https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Strict_mode
@@ -24,9 +25,6 @@ var util = require('util')
   In the starter/skeleton project the 'get' operation on the '/hello' path has an operationId named 'hello'.  Here,
   we specify that in the exports of this module that 'hello' maps to the function named 'hello'
  */
-module.exports = {
-  getPlayer: getPlayer
-}
 
 /*
   Functions in a127 controllers used for operations should take two parameters:
@@ -36,9 +34,30 @@ module.exports = {
  */
 function getPlayer (req, res) {
   // variables defined in the Swagger document can be referenced using req.swagger.params.{parameter_name}
-  let id = req.swagger.params.id.value || 'stranger'
-  let player = util.format('Hello, %s!', id)
+  let id = req.swagger.params._id.value
+  playerService.findPlayer(id).fork(
+    e => console.log(e),
+    player => {
+      console.log('success', player)
+      res.json(player)
+    }
+  )
+}
 
-  // this sends back a JSON response which is a single string
-  res.json(player)
+const createPlayer = (req, res) => {
+  let name = req.swagger.params.name.value
+  playerService.createPlayer(name).fork(
+    e => {
+      console.log('error: ', e)
+      res.json(e)
+    },
+    createdPlayer => {
+      res.json(createdPlayer)
+    }
+  )
+}
+
+module.exports = {
+  getPlayer: getPlayer,
+  createPlayer: createPlayer
 }

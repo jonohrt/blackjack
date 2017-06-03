@@ -4,7 +4,8 @@
 # Logs
 logs
 *.log
-
+server/logs/*
+!server/logs/.gitkeep
 # Runtime data
 pids
 *.pid
@@ -32,3 +33,5 @@ node_modules
 
 # Runtime configuration for swagger app
 config/runtime.yaml
+data/*
+!data/.gitkeep
