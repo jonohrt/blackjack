@@ -4,8 +4,8 @@
 # Logs
 logs
 *.log
-server/logs/*
-!server/logs/.gitkeep
+server/log/*
+!server/log/.gitkeep
 # Runtime data
 pids
 *.pid
